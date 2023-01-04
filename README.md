@@ -10,5 +10,19 @@ pip install instaloader
 
 pip install opencv-python
 
-for run app = flask run 
 
+run app use "flask run"
+
+Pencarian akun ig v1:
+
+- Limit 12 foto
+
+- loading cepat
+
+
+
+Pencarian akun ig v2:
+
+- loading hampir 40 detik
+
+- unlimited 
