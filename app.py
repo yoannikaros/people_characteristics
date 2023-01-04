@@ -19,11 +19,12 @@ app = Flask(__name__)
 def main():
     return render_template('option.html')
 
+#UPLOAD MANUAL
 @app.route("/file")
 def manual():
     return render_template('index.html')
 
-#UPLOAD MANUAL DATASET
+#PROSES UPLOAD MANUAL
 @app.route('/upload', methods=['POST'])
 def upload():
     # get the image files from the request
@@ -46,41 +47,55 @@ def allowed_file(filename):
     ALLOWED_EXTENSIONS = ['png']
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+#PENCARIAN AKUN IG VERSI 1
 @app.route("/v1")
 def cari():
     return render_template('cari.php')
 
+#PROSES PENCARIAN AKUN IG VERSI 1
 @app.route("/download/<USERNAME>")
 def download(USERNAME):
+  #AMBIL URL DARI AKUN IG SEBANYAK 3X
   downloadig(USERNAME)
+  #REMOVE BACKGORUND NYA
   rem_bg()
+  #MENGHITUNG
   mamba = hitung_mamba()
   earth = hitung_bumi()
   cake = hitung_cake()
   return render_template('berhasil.html',cake = cake, earth = earth, mamba= mamba, USERNAME = USERNAME)
 
+#PENCARIAN AKUN IG VERSI 2
 @app.route("/v2")
 def cari_v2():
     return render_template('scraper.php')
 
+#PROSES PENCARIAN AKUN IG VERSI 2
 @app.route("/scaper/<USERNAME>")
 def scrap(USERNAME):
   try:
+   #hapus folder original
     clear()
+    #download gambar ig sebayak 3x
     scrapt(USERNAME)
+    # hasil download itu dirubah namanya serta pindah folder dari original ke static/original
     rename()
+   
     rename_dua()
+    #menghapus background
     rem_bg()
   except:
     rename()
     rename_dua()
     rem_bg()
+  #MENGHITUNG
   mamba = hitung_mamba()
   earth = hitung_bumi()
   cake = hitung_cake()
   clear()
   return render_template('berhasil.html',cake = cake, earth = earth, mamba= mamba, USERNAME = USERNAME)
 
+#MENGHITUNG
 @app.route("/mamba")
 def mamba():
     return render_template('mamba.html')
