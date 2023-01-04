@@ -73,14 +73,15 @@ def cari_v2():
 #PROSES PENCARIAN AKUN IG VERSI 2
 @app.route("/scaper/<USERNAME>")
 def scrap(USERNAME):
+  # mencoba download ig keseluruhan, jika error maka dilanjut ke tahap selanjutnya
   try:
-   #hapus folder original
+    #hapus folder original dan isi serta membuat folder baru static/original
     clear()
     #download gambar ig sebayak 3x
     scrapt(USERNAME)
     # hasil download itu dirubah namanya serta pindah folder dari original ke static/original
     rename()
-   
+    #karna perhitungan loopnya 1-3 bukan dari 0 -2 maka rubah namanya insta_3.jpg ke insta_0.jpg
     rename_dua()
     #menghapus background
     rem_bg()
@@ -88,6 +89,7 @@ def scrap(USERNAME):
     rename()
     rename_dua()
     rem_bg()
+    
   #MENGHITUNG
   mamba = hitung_mamba()
   earth = hitung_bumi()
@@ -108,7 +110,7 @@ def cake():
 def earth():
     return render_template('earth.html')
 
-
+# handle error
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('scraper.php'), 404
