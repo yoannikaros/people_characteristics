@@ -10,3 +10,5 @@ pip install instaloader
 
 pip install opencv-python
 
+for run app = flask run 
+
